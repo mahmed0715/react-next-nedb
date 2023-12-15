@@ -8,18 +8,18 @@ const api = axios.create({
   baseURL: '/api'  // Replace this with your actual API base URL
 });
 
-const Form = ({ _id, data = {} }) => {
+const Form = ({ _id = null, data = {} }) => {
   const [name, setName] = useState(data?.name || '');
   const [sectors, setSectors] = useState(data?.sectors || []);
   const [agree, setAgree] = useState(data?.agree || false);
   const [id, setId] = useState(_id || null);
-  const [successMessage, setSuccessMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState(``);
   const [error, setError] = useState({ name: '', sectors: '', agree: '' });
+  
 
   const [optionsData, setOptionsData] = useState([]);
 
   const [selectedOptions, setSelectedOptions] = useState(data?.sectors || []);
-
   const options = [
     {
       label: 'Manufacturing', options: [
@@ -59,11 +59,11 @@ const Form = ({ _id, data = {} }) => {
   // }, []);
 
   // Use useEffect to fetch data and initialize the form
-  useEffect(() => {
-    // Replace this with the actual ID fetching logic
-    const fetchedId = null;  // Replace this with the actual fetched ID
-    setId(fetchedId);
-  }, []);
+  // useEffect(() => {
+  //   // Replace this with the actual ID fetching logic
+  //   const fetchedId = null;  // Replace this with the actual fetched ID
+  //   setId(fetchedId);
+  // }, []);
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -102,7 +102,7 @@ const Form = ({ _id, data = {} }) => {
         console.log(response);
         const { data } = response;
         setId(data._id);
-        setSuccessMessage("Data updated successfully!")
+        setSuccessMessage(`Data updated successfully!`)
       })
       .catch(function (error) {
         console.log(error);
@@ -153,6 +153,9 @@ const Form = ({ _id, data = {} }) => {
           <div className="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-5" role="alert">
             <p>{successMessage}</p>
           </div>
+        )}
+        {id && !_id &&(
+          <p className='mb-5'> <a className='underline text-blue-600 hover:text-blue-800 visited:text-purple-600' href={id}> Update this entry {id} </a></p>
         )}
         <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">
           Name
