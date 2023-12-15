@@ -1,10 +1,15 @@
 
 const Datastore = require('nedb-promises');
-let datastore = Datastore.create('/tmp/data.json');
+var os = require('os')
+var path = require('path')
+var tmp = os.tmpdir()
+var pathOfDatabase = path.normalize(`${tmp}/data.db`)
+let datastore = await Datastore.create(pathOfDatabase);
 export async function getALlData() {
     const data = await datastore.find({})
     console.log({ data });
     return data;
 }
+// debug only
 getALlData();
 export default datastore;

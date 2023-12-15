@@ -72,7 +72,7 @@ const Form = ({ _id = null, data = {}, options }) => {
     }
     api.put(`/data/${id}`, {
       name: name,
-      sectors: sectors,
+      sectors: selectedOptions,
       agree: agree,
     })
       .then(function (response) {
