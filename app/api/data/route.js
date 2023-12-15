@@ -2,10 +2,9 @@
 
 import { NextResponse } from 'next/server';
 
-const Datastore = require('nedb-promises');
+import datastore from '@data/db';
 
-let datastore = Datastore.create('data.db');
-export async function GET(req){
+export async function GET(req) {
     const data = await datastore.find({})
     return await NextResponse.json(data)
 }
