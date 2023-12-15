@@ -16,6 +16,9 @@ export default async function Id({ params: { id } }) {
   const options = await getSectors();
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
+     {/* <div className="flex justify-between"> */}
+       <a className="inline-flex bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded justify-start text-left items-start" href="/">Go back</a>
+     {/* </div> */}
       <Form _id={id} data={data} options={options} />
     </main>
   )
