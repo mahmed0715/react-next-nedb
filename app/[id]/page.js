@@ -3,7 +3,9 @@ import Form from "@/components/Form";
 import datastore from '@/data/db';
 import getSectors from "@/data/sectors";
 const getData = async (id) => {
-  const foundData = await datastore.findOne({_id: id});
+  const count = await datastore.count();
+  console.log('Count of the input data:', { count })
+  const foundData = await datastore.findOne({ _id: id });
   console.log({ foundData });
   return foundData;
 }
