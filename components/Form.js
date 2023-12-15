@@ -8,36 +8,42 @@ const api = axios.create({
   baseURL: '/api'  // Replace this with your actual API base URL
 });
 
-const Form = () => {
-  const [name, setName] = useState('');
-  const [sectors, setSectors] = useState([]);
-  const [agree, setAgree] = useState(false);
-  const [id, setId] = useState(null);
+const Form = ({ _id, data = {} }) => {
+  const [name, setName] = useState(data?.name || '');
+  const [sectors, setSectors] = useState(data?.sectors || []);
+  const [agree, setAgree] = useState(data?.agree || false);
+  const [id, setId] = useState(_id || null);
   const [successMessage, setSuccessMessage] = useState('');
   const [error, setError] = useState({ name: '', sectors: '', agree: '' });
 
   const [optionsData, setOptionsData] = useState([]);
 
-  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [selectedOptions, setSelectedOptions] = useState(data?.sectors || []);
 
   const options = [
-    { label: 'Manufacturing', options: [
-      { value: '1', label: 'Manufacturing' },
-      { value: '19', label: 'Construction materials' },
-      { value: '18', label: 'Electronics and Optics' },
-      // ... other options under Manufacturing
-    ] },
-    { label: 'Furniture', options: [
-      { value: '13', label: 'Furniture' },
-      { value: '389', label: 'Bathroom/sauna' },
-      // ... other options under Furniture
-    ] },
+    {
+      label: 'Manufacturing', options: [
+        { value: '1', label: 'Manufacturing' },
+        { value: '19', label: 'Construction materials' },
+        { value: '18', label: 'Electronics and Optics' },
+        // ... other options under Manufacturing
+      ]
+    },
+    {
+      label: 'Furniture', options: [
+        { value: '13', label: 'Furniture' },
+        { value: '389', label: 'Bathroom/sauna' },
+        // ... other options under Furniture
+      ]
+    },
     // ... other optgroup categories
-    { label: 'Other', options: [
-      { value: '3', label: 'Other' },
-      { value: '37', label: 'Creative industries' },
-      // ... other options under Other
-    ] },
+    {
+      label: 'Other', options: [
+        { value: '3', label: 'Other' },
+        { value: '37', label: 'Creative industries' },
+        // ... other options under Other
+      ]
+    },
   ];
   // useEffect(() => {
   //   const fetchData = async () => {
@@ -106,7 +112,7 @@ const Form = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-console.log()
+    console.log()
     if (!name || !selectedOptions.length || !agree) {
       // Set errors for fields that are not filled
       setError({
@@ -166,13 +172,13 @@ console.log()
           Sectors
         </label>
         <Select
-        id={id}  
-        isMulti
-      closeMenuOnSelect={false} // Optional, customize based on your needs
-      options={options}
-      value={selectedOptions}
-      onChange={handleSectorChange}
-      placeholder="Select your sectors" />
+          id={id}
+          isMulti
+          closeMenuOnSelect={false} // Optional, customize based on your needs
+          options={options}
+          value={selectedOptions}
+          onChange={handleSectorChange}
+          placeholder="Select your sectors" />
         {/* <Select
       isMulti
       closeMenuOnSelect={false} // Optional, customize based on your needs

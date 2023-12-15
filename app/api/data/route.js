@@ -2,7 +2,7 @@
 
 import { NextResponse } from 'next/server';
 
-import datastore from '@data/db';
+import datastore from '@/data/db';
 
 export async function GET(req) {
     const data = await datastore.find({})

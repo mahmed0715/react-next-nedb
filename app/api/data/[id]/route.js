@@ -2,9 +2,7 @@
 
 import { NextResponse } from 'next/server';
 
-const Datastore = require('nedb-promises');
-
-let datastore = Datastore.create('data.db');
+import datastore from '@/data/db'
 
 export async function GET(req, { params: { id } }) {
     console.log("Got id request", id)
