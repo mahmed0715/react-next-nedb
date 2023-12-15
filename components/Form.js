@@ -16,7 +16,7 @@ const Form = ({ _id = null, data = {}, options }) => {
   const [id, setId] = useState(_id || null);
   const [successMessage, setSuccessMessage] = useState(``);
   const [error, setError] = useState({ name: '', sectors: '', agree: '' });
-  
+
 
   const [optionsData, setOptionsData] = useState([]);
 
@@ -123,7 +123,8 @@ const Form = ({ _id = null, data = {}, options }) => {
 
   return (
     <form className="max-w-md mx-auto" onSubmit={handleSubmit}>
-      <h1 className="mt-3 mb-2 text-3xl font-extrabold tracking-tight text-slate-900 ">Please enter your name and pick the Sectors you are currently involved in.</h1>
+      {_id && <a className="inline-flex bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded justify-start text-left items-start" href="/">Go back</a>
+      }<h1 className="mt-3 mb-2 text-3xl font-extrabold tracking-tight text-slate-900 ">Please enter your name and pick the Sectors you are currently involved in.</h1>
       <hr />
       <div className="mb-4 mt-5">
         {successMessage && (
@@ -131,7 +132,7 @@ const Form = ({ _id = null, data = {}, options }) => {
             <p>{successMessage}</p>
           </div>
         )}
-        {id && !_id &&(
+        {id && !_id && (
           <p className='mb-5'> <a className='underline text-blue-600 hover:text-blue-800 visited:text-purple-600' href={id}> Update this entry {id} </a></p>
         )}
         <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">
