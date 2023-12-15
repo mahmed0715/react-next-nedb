@@ -4,12 +4,12 @@ var os = require('os')
 var path = require('path')
 var tmp = os.tmpdir()
 var pathOfDatabase = path.normalize(`${tmp}/data.db`)
-let datastore = Datastore.create({ inMemoryOnly: true});
+let datastore = Datastore.create({ filename: pathOfDatabase, autoload: true });
 export async function getALlData() {
     const data = await datastore.find({})
     console.log({ data });
     return data;
 }
 // debug only
-getALlData();
+// getALlData();
 export default datastore;

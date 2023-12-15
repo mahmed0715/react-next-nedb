@@ -1,6 +1,6 @@
 
 const Datastore = require('nedb-promises');
-const sectorOptions = await Datastore.create('/tmp/sectors.json');
+const sectorOptions = Datastore.create('/tmp/sectors.json');
 const count = await sectorOptions.count();
 console.log({count})
 if (!count) sectorOptions.insert({
