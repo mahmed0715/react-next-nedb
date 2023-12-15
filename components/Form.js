@@ -1,5 +1,6 @@
 'use client';
 import axios from 'axios';
+import Datastore from 'nedb-promises';
 import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
 
@@ -8,7 +9,7 @@ const api = axios.create({
   baseURL: '/api'  // Replace this with your actual API base URL
 });
 
-const Form = ({ _id = null, data = {} }) => {
+const Form = ({ _id = null, data = {}, options }) => {
   const [name, setName] = useState(data?.name || '');
   const [sectors, setSectors] = useState(data?.sectors || []);
   const [agree, setAgree] = useState(data?.agree || false);
@@ -20,31 +21,7 @@ const Form = ({ _id = null, data = {} }) => {
   const [optionsData, setOptionsData] = useState([]);
 
   const [selectedOptions, setSelectedOptions] = useState(data?.sectors || []);
-  const options = [
-    {
-      label: 'Manufacturing', options: [
-        { value: '1', label: 'Manufacturing' },
-        { value: '19', label: 'Construction materials' },
-        { value: '18', label: 'Electronics and Optics' },
-        // ... other options under Manufacturing
-      ]
-    },
-    {
-      label: 'Furniture', options: [
-        { value: '13', label: 'Furniture' },
-        { value: '389', label: 'Bathroom/sauna' },
-        // ... other options under Furniture
-      ]
-    },
-    // ... other optgroup categories
-    {
-      label: 'Other', options: [
-        { value: '3', label: 'Other' },
-        { value: '37', label: 'Creative industries' },
-        // ... other options under Other
-      ]
-    },
-  ];
+
   // useEffect(() => {
   //   const fetchData = async () => {
   //     try {

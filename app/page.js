@@ -1,9 +1,10 @@
 import Form from "@/components/Form";
-
-export default function Home() {
+import getSectors from '@/data/sectors';
+export default async function Home() {
+  const options = await getSectors();
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-         <Form />
+      <Form options={options} />
     </main>
   )
 }
